@@ -9,7 +9,7 @@ export default {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'docs'),
-    publicPath: './',
+    publicPath: './docs',
   },
   resolve: {
     extensions: ['.ts', '.js'],
