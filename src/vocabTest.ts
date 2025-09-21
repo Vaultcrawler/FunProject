@@ -1,6 +1,8 @@
 
+
 import type { VocabListEntry } from './types/VocabListEntry';
 import type { VocabQuestion } from './types/VocabQuestion';
+import { vocabList } from './vocab-test/vocabList';
 
 
 export class VocabTest {
@@ -10,8 +12,6 @@ export class VocabTest {
   constructor() {}
 
   async init() {
-    const module = await import('../assets/vocabList.json');
-    const vocabList = module.default as VocabListEntry[];
     this.questions = vocabList.map((entry) => {
       // Pick 3 wrong options
       const wrong = this.shuffle(
