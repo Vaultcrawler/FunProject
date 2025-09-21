@@ -5,7 +5,6 @@ url: "https://vaultcrawler.github.io/FunProject"
 baseurl: "/FunProject"
 theme: minima
 exclude:
-	- assets/css
 	- main.js
 	- main.js.map
 	- 86.main.js
