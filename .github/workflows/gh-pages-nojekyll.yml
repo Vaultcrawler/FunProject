@@ -27,9 +27,8 @@ jobs:
       - name: Copy assets to docs
         run: cp -r assets/* docs/
 
-      - name: Add .nojekyll file
-        run: |
-          touch docs/.nojekyll
+      - name: Add Jekyll theme config
+        run: echo 'theme: minima' > docs/_config.yml
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
