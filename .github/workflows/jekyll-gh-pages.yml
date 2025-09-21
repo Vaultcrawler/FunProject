@@ -30,6 +30,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Copy test/index.html to docs/
+        run: cp test/index.html docs/index.html
+      - name: Copy assets to docs/
+        run: mkdir -p docs/assets && cp -r assets/* docs/assets/
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
