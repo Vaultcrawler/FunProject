@@ -10,7 +10,6 @@ export default {
     filename: 'main.js',
     path: path.resolve(__dirname, 'docs'),
     publicPath: './',
-    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],
