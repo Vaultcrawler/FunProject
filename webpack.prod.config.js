@@ -1,3 +1,4 @@
+import { clean } from 'gh-pages';
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -9,6 +10,7 @@ export default {
     filename: 'main.js',
     path: path.resolve(__dirname, 'docs'),
     publicPath: './',
+    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],
