@@ -1,0 +1,24 @@
+{
+	"name": "copilot-testing",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"build:test": "webpack --watch --config webpack.config.js",
+		"start:sever": "webpack serve --config webpack.config.js",
+		"build:dev": "webpack --config webpack.dev.config.js",
+		"build:prod": "webpack --config webpack.prod.config.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"type": "module",
+	"devDependencies": {
+		"@types/node": "^24.5.2",
+		"ts-loader": "^9.5.4",
+		"typescript": "^5.9.2",
+		"webpack": "^5.101.3",
+		"webpack-cli": "^6.0.1",
+	"webpack-dev-server": "^5.2.2"
+	}
+}
