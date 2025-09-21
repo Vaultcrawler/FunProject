@@ -1,1 +1,16 @@
+title: FunProject
+description: A Node.js + TypeScript project deployed with Jekyll on GitHub Pages
+author: Vaultcrawler
+url: "https://vaultcrawler.github.io/FunProject"
+baseurl: "/FunProject"
 theme: minima
+exclude:
+	- assets/css
+	- main.js
+	- main.js.map
+	- 86.main.js
+	- 86.main.js.map
+	- 667.main.js
+	- src_minesweeper_minesweeper-view_ts.main.js
+	- assets_vocabList_json.main.js
+	- vocabList.json
