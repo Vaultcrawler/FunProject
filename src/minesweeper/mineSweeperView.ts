@@ -1,6 +1,6 @@
 import { Minesweeper } from './mineSweeper';
 
-export class MinesweeperView {
+export class mineSweeperView {
   private game: Minesweeper;
   private container: HTMLElement;
 

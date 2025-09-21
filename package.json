@@ -2,13 +2,13 @@
 	"name": "copilot-testing",
 	"version": "1.0.0",
 	"main": "index.js",
-		"scripts": {
-			"build:test": "webpack --watch --config webpack.config.js",
-			"start:sever": "webpack serve --config webpack.config.js",
-			"build:dev": "webpack --config webpack.dev.config.js",
-			"build:prod": "webpack --config webpack.prod.config.js",
-			"predeploy": "npm run build:prod"
-		},
+	"scripts": {
+		"build:test": "webpack --watch --config webpack.config.js",
+		"start:sever": "webpack serve --config webpack.config.js",
+		"build:dev": "webpack --config webpack.dev.config.js",
+		"build:prod": "webpack --config webpack.prod.config.js",
+		"predeploy": "npm run build:prod"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
