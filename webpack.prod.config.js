@@ -23,6 +23,9 @@ export default {
       },
     ],
   },
+  optimization: {
+    splitChunks: false,
+  },
   mode: 'production',
   devtool: 'source-map',
 };
