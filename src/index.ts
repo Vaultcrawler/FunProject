@@ -1,3 +1,4 @@
+import { MinesweeperView } from './mineSweeperView';
 import { VocabTest } from './vocabTest';
 
 class VocabTestApp {
@@ -82,7 +83,6 @@ class VocabTestApp {
 		// Statically import and start MinesweeperView
 		// @ts-ignore
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		const { MinesweeperView } = require('./minesweeper/minesweeper-view');
 		new MinesweeperView('minesweeper-container', 8, 8, 10);
 	}
 
