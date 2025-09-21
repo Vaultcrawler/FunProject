@@ -79,10 +79,11 @@ class VocabTestApp {
 			document.body.appendChild(app);
 		}
 		app.innerHTML = '<h2>Minesweeper!</h2><div id="minesweeper-container"></div>';
-		// Dynamically import and start MinesweeperView
-		import('./minesweeper/minesweeper-view').then(mod => {
-			new mod.MinesweeperView('minesweeper-container', 8, 8, 10);
-		});
+		// Statically import and start MinesweeperView
+		// @ts-ignore
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
+		const { MinesweeperView } = require('./minesweeper/minesweeper-view');
+		new MinesweeperView('minesweeper-container', 8, 8, 10);
 	}
 
 	renderEnd() {
