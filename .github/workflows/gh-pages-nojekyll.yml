@@ -24,8 +24,6 @@ jobs:
       - name: Build project
         run: npm run build:prod
 
-      - name: Copy assets to docs
-        run: cp -r assets/* docs/
 
       - name: Add Jekyll theme config
         run: |
