@@ -1,5 +1,3 @@
-
-
 import { VocabTest } from './vocabTest';
 
 class VocabTestApp {
