@@ -9,18 +9,7 @@ class VocabTestApp {
 
 	constructor() {
 		this.vocabTest = new VocabTest();
-		this.showLoader();
 		this.initAndStart();
-	}
-
-	private showLoader() {
-		let app = document.getElementById('app');
-		if (!app) {
-			app = document.createElement('div');
-			app.id = 'app';
-			document.body.appendChild(app);
-		}
-		app.innerHTML = `<div style="text-align:center;padding:2em;font-size:1.2em;">Vokabeln werden geladen...</div>`;
 	}
 
 	private async initAndStart() {

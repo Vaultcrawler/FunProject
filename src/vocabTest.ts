@@ -1,6 +1,3 @@
-
-
-import type { VocabListEntry } from './types/VocabListEntry';
 import type { VocabQuestion } from './types/VocabQuestion';
 import { vocabList } from './vocab-test/vocabList';
 
