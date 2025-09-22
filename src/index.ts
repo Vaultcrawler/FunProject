@@ -80,9 +80,6 @@ class VocabTestApp {
 			document.body.appendChild(app);
 		}
 		app.innerHTML = '<h2>Minesweeper!</h2><div id="minesweeper-container"></div>';
-		// Statically import and start MinesweeperView
-		// @ts-ignore
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		new mineSweeperView('minesweeper-container', 8, 8, 10);
 	}
 
