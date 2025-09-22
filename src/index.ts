@@ -39,7 +39,7 @@ class VocabTestApp {
 							<div id="result" style="margin-top:1em;"></div>
 						</div>
 						<div id="minesweeper-section" style="${this.correctCount >= 5 ? '' : 'display:none;'} max-width: 500px; width: 100%; margin-left: 2em;">
-							<h2>Minesweeper!</h2>
+							<h2>Good. Play a round</h2>
 							<div id="minesweeper-container"></div>
 						</div>
 					</div>
