@@ -32,8 +32,6 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Copy assets to docs/
         run: mkdir -p docs/assets && cp -r assets/* docs/assets/
-      - name: Delete docs/*.main.js files
-        run: rm -f docs/*.main.js*
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
