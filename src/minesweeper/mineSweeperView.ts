@@ -14,12 +14,23 @@ export class mineSweeperView {
 
   render() {
     this.container.innerHTML = '';
+    // Flags and bombs display
+    const flags = this.countFlags();
+    const bombs = this.game.mines;
+    const infoDiv = document.createElement('div');
+    infoDiv.style.display = 'flex';
+    infoDiv.style.justifyContent = 'center';
+    infoDiv.style.alignItems = 'center';
+    infoDiv.style.marginBottom = '1em';
+    infoDiv.innerHTML = `<span style="font-size:1.2em;">🚩 ${flags} / 💣 ${bombs}</span>`;
+    this.container.appendChild(infoDiv);
+
     const table = document.createElement('table');
     table.style.borderCollapse = 'collapse';
     for (let r = 0; r < this.game.rows; r++) {
       const tr = document.createElement('tr');
       for (let c = 0; c < this.game.cols; c++) {
-  const cell = this.game.board[r]![c]!;
+        const cell = this.game.board[r]![c]!;
         const td = document.createElement('td');
         td.style.width = '32px';
         td.style.height = '32px';
@@ -27,7 +38,18 @@ export class mineSweeperView {
         td.style.border = '1px solid #888';
         td.style.background = cell.isRevealed ? '#e0e0e0' : '#b0b0b0';
         td.style.cursor = cell.isRevealed ? 'default' : 'pointer';
-        if (cell.isRevealed) {
+
+        // Reveal all bombs on game over
+        if (this.game.gameOver && cell.isMine) {
+          td.style.background = '#ffb3b3';
+          if (cell.isFlagged) {
+            td.textContent = '❌';
+            td.style.color = 'red';
+            td.style.fontWeight = 'bold';
+          } else {
+            td.textContent = '💣';
+          }
+        } else if (cell.isRevealed) {
           if (cell.isMine) {
             td.textContent = '💣';
             td.style.background = '#ffb3b3';
@@ -38,24 +60,29 @@ export class mineSweeperView {
         } else if (cell.isFlagged) {
           td.textContent = '🚩';
         }
+
         td.oncontextmenu = (e) => {
           e.preventDefault();
-          this.game.toggleFlag(r, c);
-          this.render();
+          if (!this.game.gameOver) {
+            this.game.toggleFlag(r, c);
+            this.render();
+          }
         };
         td.onclick = () => {
-          this.game.reveal(r, c);
-          this.render();
-          if (this.game.gameOver) {
-            setTimeout(() => {
-            alert('Game Over!');
-            location.reload();
-          }, 100);
-          } else if (this.game.isWin()) {
-            setTimeout(() => {
-            alert('You Win!');
-            location.reload();
-          }, 100);
+          if (!this.game.gameOver) {
+            this.game.reveal(r, c);
+            this.render();
+            if (this.game.gameOver) {
+              setTimeout(() => {
+                alert('Game Over!');
+                location.reload();
+              }, 100);
+            } else if (this.game.isWin()) {
+              setTimeout(() => {
+                alert('You Win!');
+                location.reload();
+              }, 100);
+            }
           }
         };
         tr.appendChild(td);
@@ -63,5 +90,15 @@ export class mineSweeperView {
       table.appendChild(tr);
     }
     this.container.appendChild(table);
+  }
+
+  private countFlags(): number {
+    let count = 0;
+    for (let r = 0; r < this.game.rows; r++) {
+      for (let c = 0; c < this.game.cols; c++) {
+        if (this.game.board[r]![c]!.isFlagged) count++;
+      }
+    }
+    return count;
   }
 }

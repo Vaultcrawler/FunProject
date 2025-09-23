@@ -5,24 +5,26 @@ export type Cell = {
   adjacentMines: number;
 };
 
+
 export class Minesweeper {
   board: Cell[][];
   rows: number;
   cols: number;
   mines: number;
   gameOver: boolean;
+  private firstClick: boolean;
 
   constructor(rows = 8, cols = 8, mines = 10) {
     this.rows = rows;
     this.cols = cols;
     this.mines = mines;
     this.gameOver = false;
-    this.board = this.generateBoard();
+    this.firstClick = true;
+    this.board = this.generateEmptyBoard();
   }
 
-  generateBoard(): Cell[][] {
-    // Create empty board
-    const board: Cell[][] = Array.from({ length: this.rows }, () =>
+  private generateEmptyBoard(): Cell[][] {
+    return Array.from({ length: this.rows }, () =>
       Array.from({ length: this.cols }, () => ({
         isMine: false,
         isRevealed: false,
@@ -30,25 +32,37 @@ export class Minesweeper {
         adjacentMines: 0,
       }))
     );
-    // Place mines
+  }
+
+  private placeMines(firstRow: number, firstCol: number) {
+    // Place mines, but never on the first clicked cell or its neighbors
     let placed = 0;
+    const forbidden: Set<string> = new Set();
+    for (let dr = -1; dr <= 1; dr++) {
+      for (let dc = -1; dc <= 1; dc++) {
+        const nr = firstRow + dr;
+        const nc = firstCol + dc;
+        if (nr >= 0 && nr < this.rows && nc >= 0 && nc < this.cols) {
+          forbidden.add(`${nr},${nc}`);
+        }
+      }
+    }
     while (placed < this.mines) {
       const r = Math.floor(Math.random() * this.rows);
       const c = Math.floor(Math.random() * this.cols);
-      if (!board[r]![c]!.isMine) {
-        board[r]![c]!.isMine = true;
+      if (!this.board[r]![c]!.isMine && !forbidden.has(`${r},${c}`)) {
+        this.board[r]![c]!.isMine = true;
         placed++;
       }
     }
     // Calculate adjacent mines
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++) {
-        if (!board[r]![c]!.isMine) {
-          board[r]![c]!.adjacentMines = this.countAdjacentMines(board, r, c);
+        if (!this.board[r]![c]!.isMine) {
+          this.board[r]![c]!.adjacentMines = this.countAdjacentMines(this.board, r, c);
         }
       }
     }
-    return board;
   }
 
   countAdjacentMines(board: Cell[][], row: number, col: number): number {
@@ -68,6 +82,21 @@ export class Minesweeper {
 
   reveal(row: number, col: number): void {
     if (this.gameOver || this.board[row]![col]!.isRevealed || this.board[row]![col]!.isFlagged) return;
+
+    if (this.firstClick) {
+      // Place mines after first click, ensure first cell is empty (adjacentMines === 0)
+      let safe = false;
+      while (!safe) {
+        // Reset board
+        this.board = this.generateEmptyBoard();
+        this.placeMines(row, col);
+        if (!this.board[row]![col]!.isMine && this.board[row]![col]!.adjacentMines === 0) {
+          safe = true;
+        }
+      }
+      this.firstClick = false;
+    }
+
     this.board[row]![col]!.isRevealed = true;
     if (this.board[row]![col]!.isMine) {
       this.gameOver = true;
